@@ -54,10 +54,6 @@ public class BigramCountPairs extends Configured implements Tool {
 			 * TODO: Your implementation goes here
 			 */
 			for (int i=0; i<words.length-1; ++i) {
-				// Skip empty words
-				if (words[i].length() == 0) {
-					continue;
-				}
 				BIGRAM.set(words[i],words[i+1]);
 				context.write(BIGRAM, ONE);
 			}
