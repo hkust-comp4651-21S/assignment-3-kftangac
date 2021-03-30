@@ -1,0 +1,62 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building assignment-3 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ assignment-3 ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.5:resources (default-resources) @ assignment-3 ---
+[debug] execute contextualize
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/cloudera/comp4651/assignment-3-grading/assignment-3-kftangac/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ assignment-3 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 11 source files to /home/cloudera/comp4651/assignment-3-grading/assignment-3-kftangac/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/cloudera/comp4651/assignment-3-grading/assignment-3-kftangac/src/main/java/hk/ust/comp4651/BigramCountStripes.java:[91,25] cannot find symbol
+  symbol:   class Iterator
+  location: class hk.ust.comp4651.BigramCountStripes.MyReducer
+[ERROR] /home/cloudera/comp4651/assignment-3-grading/assignment-3-kftangac/src/main/java/hk/ust/comp4651/BigramCountPairs.java:[79,25] cannot find symbol
+  symbol:   class Iterator
+  location: class hk.ust.comp4651.BigramCountPairs.MyReducer
+[ERROR] /home/cloudera/comp4651/assignment-3-grading/assignment-3-kftangac/src/main/java/hk/ust/comp4651/BigramFrequencyStripes.java:[90,25] cannot find symbol
+  symbol:   class Set
+  location: class hk.ust.comp4651.BigramFrequencyStripes.MyReducer
+[INFO] 3 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 4.197s
+[INFO] Finished at: Tue Mar 30 06:06:01 PDT 2021
+[INFO] Final Memory: 21M/57M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project assignment-3: Compilation failure: Compilation failure:
+[ERROR] /home/cloudera/comp4651/assignment-3-grading/assignment-3-kftangac/src/main/java/hk/ust/comp4651/BigramCountStripes.java:[91,25] cannot find symbol
+[ERROR] symbol:   class Iterator
+[ERROR] location: class hk.ust.comp4651.BigramCountStripes.MyReducer
+[ERROR] /home/cloudera/comp4651/assignment-3-grading/assignment-3-kftangac/src/main/java/hk/ust/comp4651/BigramCountPairs.java:[79,25] cannot find symbol
+[ERROR] symbol:   class Iterator
+[ERROR] location: class hk.ust.comp4651.BigramCountPairs.MyReducer
+[ERROR] /home/cloudera/comp4651/assignment-3-grading/assignment-3-kftangac/src/main/java/hk/ust/comp4651/BigramFrequencyStripes.java:[90,25] cannot find symbol
+[ERROR] symbol:   class Set
+[ERROR] location: class hk.ust.comp4651.BigramFrequencyStripes.MyReducer
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+====BigramPairs====
+[ERROR] MapReduce TIMEOUT for BigramPairs
+====BigramStripes====
+[ERROR] MapReduce TIMEOUT for BigramStripes
+====BigramFrePairs====
+[ERROR] MapReduce TIMEOUT for BigramFrePairs
+====BigramFreStripes====
+[ERROR] MapReduce TIMEOUT for BigramFreStripes

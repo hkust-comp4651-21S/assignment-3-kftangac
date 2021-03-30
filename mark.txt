@@ -1,0 +1,6 @@
+kftangac kftangac mark: 
+====BigramPairs==== Mark: 0/1
+====BigramStripes==== Mark: 0/1
+====BigramFrePairs==== Mark: 0/2
+====BigramFreStripes==== Mark: 0/2
+====Total Mark: 0/6
