@@ -2,6 +2,7 @@ package hk.ust.comp4651;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -53,6 +54,10 @@ public class BigramCountPairs extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here
 			 */
+			for (int i=0; i<words.length-1; ++i) {
+				BIGRAM.set(words[i],words[i+1]);
+				context.write(BIGRAM, ONE);
+			}
 		}
 	}
 
@@ -72,6 +77,13 @@ public class BigramCountPairs extends Configured implements Tool {
 			 * TODO: Your implementation goes here. The output must be a
 			 * sequence of key-value pairs of <bigram, count>
 			 */
+			Iterator<IntWritable> iter = values.iterator();
+			int sum = 0;
+			while (iter.hasNext()) {
+				sum += iter.next().get();
+			}
+			SUM.set(sum);
+			context.write(key, SUM);
 		}
 	}
 

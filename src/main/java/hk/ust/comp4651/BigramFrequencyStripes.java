@@ -3,6 +3,7 @@ package hk.ust.comp4651;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -54,6 +55,15 @@ public class BigramFrequencyStripes extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here.
 			 */
+			for(int i=0; i<words.length-1; ++i){
+				KEY.set(words[i]);
+				STRIPE.increment(words[i+1]);
+				context.write(KEY, STRIPE);
+				STRIPE.clear();
+				STRIPE.increment("");
+				context.write(KEY, STRIPE);
+				STRIPE.clear();
+			}
 		}
 	}
 
@@ -67,7 +77,7 @@ public class BigramFrequencyStripes extends Configured implements Tool {
 		private final static HashMapStringIntWritable SUM_STRIPES = new HashMapStringIntWritable();
 		private final static PairOfStrings BIGRAM = new PairOfStrings();
 		private final static FloatWritable FREQ = new FloatWritable();
-
+		private static int total = 0;
 		@Override
 		public void reduce(Text key,
 				Iterable<HashMapStringIntWritable> stripes, Context context)
@@ -75,6 +85,22 @@ public class BigramFrequencyStripes extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here
 			 */
+			for(HashMapStringIntWritable stripe:stripes){
+				SUM_STRIPES.plus(stripe);
+			}
+			Set<String> key_set = SUM_STRIPES.keySet();
+			for(String key1:key_set){
+				if(key1.equals("")){
+					total = SUM_STRIPES.get(key1);
+					FREQ.set(SUM_STRIPES.get(key1));
+			    }	
+			    else{
+			    	FREQ.set(SUM_STRIPES.get(key1) /(float) total);
+			    }
+				BIGRAM.set(key.toString(), key1);
+				context.write(BIGRAM, FREQ);
+			}
+			SUM_STRIPES.clear();
 		}
 	}
 
@@ -86,7 +112,7 @@ public class BigramFrequencyStripes extends Configured implements Tool {
 			Reducer<Text, HashMapStringIntWritable, Text, HashMapStringIntWritable> {
 		// Reuse objects.
 		private final static HashMapStringIntWritable SUM_STRIPES = new HashMapStringIntWritable();
-
+		
 		@Override
 		public void reduce(Text key,
 				Iterable<HashMapStringIntWritable> stripes, Context context)
@@ -94,6 +120,11 @@ public class BigramFrequencyStripes extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here
 			 */
+			for(HashMapStringIntWritable stripe : stripes){
+				SUM_STRIPES.plus(stripe);
+			}
+			context.write(key, SUM_STRIPES);
+			SUM_STRIPES.clear();			
 		}
 	}
 

@@ -2,6 +2,8 @@ package hk.ust.comp4651;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -25,6 +27,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import org.apache.log4j.Logger;
+
 
 /**
  * Compute the bigram count using the "stripes" approach
@@ -52,6 +55,14 @@ public class BigramCountStripes extends Configured implements Tool {
 			/*
 			 * TODO: Your implementation goes here
 			 */
+			for (int i=0; i<=words.length-1; ++i) {
+				// Skip empty words
+				if (words[i].length() == 0) {
+					continue;
+				}
+				STRIPE.increment(words[i]);	
+			}
+			context.write(KEY, STRIPE);
 		}
 	}
 
@@ -80,6 +91,13 @@ public class BigramCountStripes extends Configured implements Tool {
 			 * The output must be a sequence of key-value pairs of <bigram,
 			 * count>, the same as that of the "pairs" approach
 			 */
+			Iterator<HashMapStringIntWritable> iter = stripes.iterator();
+			int sum = 0;
+			while (iter.hasNext()) {
+				sum += iter.next().get(key);
+			}
+			COUNT.set(sum);
+			context.write(BIGRAM, COUNT);
 		}
 	}
 
